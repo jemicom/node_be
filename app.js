@@ -20,7 +20,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('view engine', 'jade');
 
 app.use(cors()); // 어떤 url 요청도 모두 들어주기, url을 제한할 필요가 있음 
 app.use(logger('dev'));
@@ -29,7 +29,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
+app.get('/', (req, res)=>{
+  res.sendFile(path.join(__dirname, "views" , 'index.html'))
+})
 app.use('/users', usersRouter);
 app.use('/board', boardRouter);
 app.use('/makeup', makeupRouter);
